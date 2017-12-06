@@ -23,6 +23,7 @@ class InitSeeder extends Seeder
         $admin = User::create([
             'name'     => 'Admin',
             'email'    => 'admin@mediacar.com',
+            'phone'    => '01006505723',
             'password' => bcrypt('admin')
         ]);
 

@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['web','auth','role:Admin']], function () {
+    Route::resource('drivers', 'DriverController', ['except' => 'create']);
+    Route::resource('vendors', 'VendorController', ['except' => 'create']);
+
+});

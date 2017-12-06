@@ -1,5 +1,6 @@
-
 window._ = require('lodash');
+
+window.Popper = require('popper.js/dist/umd/popper');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -8,9 +9,9 @@ window._ = require('lodash');
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require('jquery/dist/jquery.slim');
 
-    require('bootstrap-sass');
+    require('bootstrap');
 } catch (e) {}
 
 /**
@@ -36,6 +37,19 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+window.Vue = require('vue');
+
+import Turbolinks from 'turbolinks';
+Turbolinks.start();
+
+window.TurbolinksAdapter = require('vue-turbolinks');
+Vue.use(TurbolinksAdapter);
+
+window.swal = require('sweetalert2');
+
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

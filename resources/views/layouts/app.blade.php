@@ -17,7 +17,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/core-ui.js') }}"></script>
-    @stack('js')
 </head>
 <body>
     <div class="app header-fixed @role('Admin') sidebar-fixed @else sidebar-hidden @endrole aside-menu-fixed aside-menu-hidden" id="app">
@@ -50,7 +49,6 @@
             </button>  --}}
         </header>
 
-
         <div class="app-body">
             @include('layouts.sidebar')
             <!-- Main content -->
@@ -62,6 +60,8 @@
         </div>
         @yield('footer')
     </div>
+    @stack('js')
+    @include('alert')
 
 </body>
 </html>

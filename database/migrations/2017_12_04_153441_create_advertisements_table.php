@@ -16,9 +16,10 @@ class CreateAdvertisementsTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('advertisements', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('vendor_id')->index();
+            $table->unsignedInteger('vendor_id')->index()->nullable();
             $table->string('title');
             $table->string('source');
+            $table->string('type'); // Banner, Video
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->timestamps();
         });

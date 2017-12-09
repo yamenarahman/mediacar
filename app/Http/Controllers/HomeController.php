@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Vendor;
 use App\Advertisement;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -26,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', ['ads' => Advertisement::all()->shuffle()]);
     }
 }

@@ -14,17 +14,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('advertisements.index', ['advertisements' => Advertisement::latest()->with('vendor')->get()]);
     }
 
     /**
@@ -35,7 +25,19 @@ class AdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'source' => 'required',
+            'type' => 'required'
+        ]);
+
+        Advertisement::create([
+            'title' => request('title'),
+            'type' => request('type'),
+            'source' => request('source')
+        ]);
+
+        return redirect('/advertisements');
     }
 
     /**
@@ -69,7 +71,19 @@ class AdvertisementController extends Controller
      */
     public function update(Request $request, Advertisement $advertisement)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'source' => 'required',
+            'type' => 'required'
+        ]);
+
+        $advertisement->update([
+            'title' => request('title'),
+            'type' => request('type'),
+            'source' => request('source')
+        ]);
+
+        return redirect('/advertisements');
     }
 
     /**
@@ -80,6 +94,6 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
-        //
+        $advertisement->delete();
     }
 }

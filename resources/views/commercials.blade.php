@@ -1,17 +1,23 @@
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">commercials</div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <b-carousel id="commercials"
+                style="text-shadow: 1px 1px 2px #333;"
+                controls
+                indicators
+                background="#ababab"
+                :interval="4000"
+                img-width="1024"
+                img-height="480"
+                v-model="slide"
+                @sliding-start="onSlideStart"
+                @sliding-end="onSlideEnd">
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                    @endif You are logged in!
-                </div>
-            </div>
+                @foreach($ads as $ad)
+                    <b-carousel-slide img-src="{{ $ad->source }}">
+                    </b-carousel-slide>
+                @endforeach
+            </b-carousel>
         </div>
     </div>
 </div>

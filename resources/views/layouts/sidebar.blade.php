@@ -13,12 +13,12 @@
                     <span class="badge badge-primary"></span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{--  <li class="nav-item">
                 <a class="nav-link" href="{{ url('/vendors') }}">
                     <i class="icon-diamond" aria-hidden="true"></i> Vendors
                     <span class="badge badge-primary"></span>
                 </a>
-            </li>
+            </li>  --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/advertisements') }}">
                     <i class="icon-picture" aria-hidden="true"></i> Ads

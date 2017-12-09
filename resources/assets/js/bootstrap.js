@@ -46,10 +46,14 @@ Turbolinks.start();
 window.TurbolinksAdapter = require('vue-turbolinks');
 Vue.use(TurbolinksAdapter);
 
-window.swal = require('sweetalert2');
-
 import BootstrapVue from 'bootstrap-vue';
 Vue.use(BootstrapVue);
+
+window.swal = require('sweetalert');
+
+import VueYouTubeEmbed from 'vue-youtube-embed';
+Vue.use(VueYouTubeEmbed);
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

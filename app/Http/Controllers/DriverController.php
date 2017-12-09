@@ -14,7 +14,7 @@ class DriverController extends Controller
      */
     public function index()
     {
-        $drivers = User::role('Driver')->orderBy('name')->get();
+        $drivers = User::role('Driver')->orderBy('name')->with('information')->get();
 
         return view('drivers.index', compact('drivers'));
     }
@@ -27,7 +27,26 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name'        => 'required',
+            'phone'       => 'required|unique:users',
+            'national-id' => 'nullable'
+        ]);
+
+        $driver = User::create([
+            'name'     => request('name'),
+            'phone'    => request('phone'),
+            'email'    => request('phone').'@mediacar.com',
+            'password' => bcrypt(request('phone'))
+        ]);
+
+        $driver->assignRole('Driver');
+
+        if (request('national-id')) {
+            $driver->information()->updateOrCreate(['nationalId' => request('national-id')]);
+        }
+
+        return redirect('/drivers');
     }
 
     /**
@@ -59,9 +78,24 @@ class DriverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $driver = User::findOrFail($id);
+
+        request()->validate([
+            'name'        => 'required',
+            'phone'       => 'required|unique:users,phone,'.$driver->id,
+            'national-id' => 'nullable'
+        ]);
+
+        $driver->update([
+            'name'     => request('name'),
+            'phone'    => request('phone'),
+            'email'    => request('phone').'@mediacar.com',
+            'password' => bcrypt(request('phone'))
+        ]);
+
+        return redirect('/drivers');
     }
 
     /**
@@ -72,6 +106,7 @@ class DriverController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect('/drivers');
     }
 }

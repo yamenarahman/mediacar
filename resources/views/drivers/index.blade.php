@@ -3,27 +3,59 @@
 @section('content')
 <div class="row">
     <div class="col">
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                <b-alert variant="danger"
+                    show
+                    dismissible>
+                    {{ $error }}
+                </b-alert>
+            @endforeach
+        @endif
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#create-driver">
           <i class="fa fa-plus"></i> Add new driver
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal fade" id="create-driver" tabindex="-1" role="dialog" aria-labelledby="create-driver" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="modelTitleId">Modal title</h4>
+                        <h4 class="modal-title" id="create-driver">Create new driver</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        Body
+                        <form method="POST" id="create-driver-form" action="{{ route('drivers.store') }}">
+                            {{ csrf_field() }}
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon">
+                                    <i class="icon-user"></i>
+                                </span>
+                                <input type="text" name="name" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="name" aria-describedby="helpId" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon">
+                                    <i class="icon-phone"></i>
+                                </span>
+                                <input type="text" name="phone" id="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="phone"
+                                    aria-describedby="helpId" required>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon">
+                                    <i class="icon-credit-card"></i>
+                                </span>
+                                <input type="text" name="national-id" id="national-id" class="form-control{{ $errors->has('national-id') ? ' is-invalid' : '' }}" placeholder="national-id"
+                                    aria-describedby="helpId" required>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <a class="btn btn-primary" onclick="event.preventDefault();document.getElementById('create-driver-form').submit();">Save</a>
                     </div>
                 </div>
             </div>
@@ -37,6 +69,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Phone</th>
+                    <th>National ID</th>
                     <th>Hours</th>
                     <th>Actions</th>
                 </tr>
@@ -46,10 +79,64 @@
                     <tr>
                         <td scope="row">{{ $driver->name }}</td>
                         <td>{{ $driver->phone }}</td>
+                        <td>{{ $driver->information->nationalId }}</td>
                         <td></td>
                         <td>
-                            <form class="form-inline">
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-default pull-left" data-toggle="modal" data-target="#edit-driver-{{ $driver->id }}">
+                                <i class="fa fa-edit"></i> Edit driver
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="edit-driver-{{ $driver->id }}" tabindex="-1" role="dialog" aria-labelledby="edit-driver" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="edit-driver">Edit driver</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" id="edit-driver-form-{{ $driver->id }}" action="{{ url('/drivers/'.$driver->id) }}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('PUT') }}
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-user"></i>
+                                                    </span>
+                                                    <input type="text" name="name" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="name"
+                                                        aria-describedby="helpId" required value="{{ $driver->name }}">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-phone"></i>
+                                                    </span>
+                                                    <input type="text" name="phone" id="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="phone"
+                                                        aria-describedby="helpId" required value="{{ $driver->phone }}">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-credit-card"></i>
+                                                    </span>
+                                                    <input type="text" name="national-id" id="national-id" class="form-control{{ $errors->has('national-id') ? ' is-invalid' : '' }}"
+                                                        placeholder="national-id" aria-describedby="helpId" required value="{{ $driver->information->nationalId }}" >
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a class="btn btn-primary" onclick="event.preventDefault();document.getElementById('edit-driver-form-{{ $driver->id }}').submit();">Save</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="form-inline" action="{{ url('/drivers/'.$driver->id) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-danger" id="delete-driver-btn" onclick="return confirm('Confirm, please.');">
+                                    <i class="fa fa-trash"></i> Delete</button>
                             </form>
                         </td>
                     </tr>

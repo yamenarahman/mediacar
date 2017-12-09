@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['web','auth','role:Admin']], function () {
-    Route::resource('drivers', 'DriverController', ['except' => 'create']);
-    Route::resource('vendors', 'VendorController', ['except' => 'create']);
-
+    Route::resource('drivers', 'DriverController', ['except' => ['create', 'edit']]);
+    Route::resource('vendors', 'VendorController', ['except' => ['create', 'edit']]);
+    Route::resource('advertisements', 'AdvertisementController', ['except' => ['create', 'edit']]);
 });

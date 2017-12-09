@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/settings', 'SettingsController@index');
+Route::put('/settings', 'SettingsController@update');
 
 Route::group(['middleware' => ['web','auth','role:Admin']], function () {
     Route::resource('drivers', 'DriverController', ['except' => ['create', 'edit']]);

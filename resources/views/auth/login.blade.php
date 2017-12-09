@@ -16,23 +16,13 @@
                                     <span class="input-group-addon">
                                         <i class="icon-user"></i>
                                     </span>
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email or phone" required autofocus>
-                                    @if ($errors->has('email'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </div>
-                                    @endif
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="01111@mediacar.com" required autofocus>
                                 </div>
                                 <div class="input-group mb-4">
                                     <span class="input-group-addon">
                                         <i class="icon-lock"></i>
                                     </span>
                                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Password">
-                                    @if ($errors->has('password'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </div>
-                                    @endif
                                 </div>
                                 <div class="row">
                                     <div class="col-6">

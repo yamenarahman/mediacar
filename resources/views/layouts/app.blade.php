@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/core-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-vue.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/core-ui.js') }}"></script>
@@ -32,7 +33,7 @@
                         {{ auth()->user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('/settings') }}">
                             <i class="fa fa-wrench"></i> Settings</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             <i class="fa fa-lock"></i> Logout

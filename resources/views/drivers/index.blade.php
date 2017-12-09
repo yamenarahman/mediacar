@@ -79,7 +79,7 @@
                     <tr>
                         <td scope="row">{{ $driver->name }}</td>
                         <td>{{ $driver->phone }}</td>
-                        <td>{{ $driver->information->nationalId }}</td>
+                        <td>{{ optional($driver->information)->nationalId }}</td>
                         <td></td>
                         <td>
                             <!-- Button trigger modal -->
@@ -121,7 +121,7 @@
                                                         <i class="icon-credit-card"></i>
                                                     </span>
                                                     <input type="text" name="national-id" id="national-id" class="form-control{{ $errors->has('national-id') ? ' is-invalid' : '' }}"
-                                                        placeholder="national-id" aria-describedby="helpId" required value="{{ $driver->information->nationalId }}" >
+                                                    placeholder="national-id" aria-describedby="helpId" required value="{{ optional($driver->information)->nationalId }}" >
                                                 </div>
                                             </form>
                                         </div>

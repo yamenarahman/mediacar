@@ -1,23 +1,36 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <b-carousel id="commercials"
-                style="text-shadow: 1px 1px 2px #333;"
-                controls
-                indicators
-                background="#ababab"
-                :interval="4000"
-                img-width="1024"
-                img-height="480"
-                v-model="slide"
-                @sliding-start="onSlideStart"
-                @sliding-end="onSlideEnd">
+            @if($ads->isEmpty())
+                <h4 class="text-center">No ads yet.</h4>
+            @else
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                    @foreach($ads as $ad)
+                        <div class="carousel-item {{ $loop->first? ' active': ' ' }}">
+                            @switch($ad->type)
+                                @case('picture')
+                                    <img class="d-block w-100" src="{{ $ad->source }}" alt="{{ $ad->title }}" style="width: 100%; height: 600px;">
+                                    @break
+                                @case('video')
+                                    <iframe src="{{ 'https://www.youtube.com/embed/'.$ad->source }} " frameborder="0" style="width: 100%; height: 600px;"></iframe>
+                                    @break
+                                @default
 
-                @foreach($ads as $ad)
-                    <b-carousel-slide img-src="{{ $ad->source }}">
-                    </b-carousel-slide>
-                @endforeach
-            </b-carousel>
+                            @endswitch
+                        </div>
+                    @endforeach
+                    </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                </div>
+            @endif
         </div>
     </div>
 </div>

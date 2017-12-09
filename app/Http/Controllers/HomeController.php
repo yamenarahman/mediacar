@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Advertisement;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['ads' => Advertisement::all()->shuffle()]);
+        return view('home', [
+            'ads' => Advertisement::all()->shuffle(),
+            'drivers' => User::role('Driver')->count(),
+            'adsCount' => Advertisement::count()
+        ]);
     }
 }

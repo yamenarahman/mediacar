@@ -4,6 +4,7 @@ namespace App;
 
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -19,6 +20,8 @@ class User extends Authenticatable
         'name', 'email', 'password', 'phone'
     ];
 
+    protected $appends = ['hours', 'allHours'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -28,8 +31,35 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::addGlobalScope('hours', function (Builder $builder) {
+    //         $builder->count();
+    //     });
+    // }
+
     public function information()
     {
         return $this->hasOne(Information::class);
+    }
+
+    public function shifts()
+    {
+        return $this->hasMany(Shift::class);
+    }
+
+    public function getAllHoursAttribute()
+    {
+        $hours = floor($this->shifts()->sum('minutes') / 60);
+        $minutes = ($this->shifts()->sum('minutes') % 60);
+
+        return $hours.' hours, '.$minutes.' minutes.';
+    }
+
+    public function getHoursAttribute()
+    {
+        return floor($this->shifts()->sum('minutes') / 60);
     }
 }

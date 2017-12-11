@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="{{ asset('css/core-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-vue.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">  --}}
+    {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">  --}}
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/core-ui.js') }}"></script>
+    {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>  --}}
 </head>
 <body>
     <div class="app header-fixed @role('Admin') sidebar-fixed @else sidebar-hidden @endrole aside-menu-fixed aside-menu-hidden" id="app">

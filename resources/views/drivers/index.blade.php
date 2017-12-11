@@ -80,7 +80,7 @@
                         <td scope="row">{{ $driver->name }}</td>
                         <td>{{ $driver->phone }}</td>
                         <td>{{ optional($driver->information)->nationalId }}</td>
-                        <td></td>
+                        <td>{{ $driver->allHours }} <a href="{{ url('/drivers/'.$driver->id) }}" class="btn btn-outline-primary">view report</a></td>
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-default pull-left" data-toggle="modal" data-target="#edit-driver-{{ $driver->id }}">

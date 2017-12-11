@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class DriverController extends Controller
 {
@@ -57,7 +58,10 @@ class DriverController extends Controller
      */
     public function show($id)
     {
-        //
+        $driver = User::role('Driver')->findOrFail($id);
+        $driver->with('shifts');
+
+        return view('drivers.show', compact('driver'));
     }
 
     /**

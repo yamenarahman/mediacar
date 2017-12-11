@@ -13,7 +13,7 @@
                                     <img class="d-block w-100" src="{{ $ad->source }}" alt="{{ $ad->title }}" style="width: 100%; height: 600px;">
                                     @break
                                 @case('video')
-                                    <iframe src="{{ 'https://www.youtube.com/embed/'.$ad->source }} " frameborder="0" style="width: 100%; height: 600px;"></iframe>
+                                    <iframe src="{{ 'https://www.youtube.com/embed/'.$ad->source.'?autoplay=1' }} " frameborder="0" style="width: 100%; height: 600px;"></iframe>
                                     @break
                                 @default
 

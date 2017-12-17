@@ -49,7 +49,13 @@
                                     <i class="icon-credit-card"></i>
                                 </span>
                                 <input type="text" name="national-id" id="national-id" class="form-control{{ $errors->has('national-id') ? ' is-invalid' : '' }}" placeholder="national-id"
-                                    aria-describedby="helpId" required>
+                                    aria-describedby="helpId">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon">
+                                    <i class="icon-flag"></i>
+                                </span>
+                                <input type="text" name="city" id="city" class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}" placeholder="city" aria-describedby="helpId">
                             </div>
                         </form>
                     </div>
@@ -64,12 +70,13 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <table class="table table-responsive-sm table-striped">
+        <table class="table table-responsive-sm table-striped datatable">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Phone</th>
                     <th>National ID</th>
+                    <th>City</th>
                     <th>Hours</th>
                     <th>Actions</th>
                 </tr>
@@ -80,6 +87,7 @@
                         <td scope="row">{{ $driver->name }}</td>
                         <td>{{ $driver->phone }}</td>
                         <td>{{ optional($driver->information)->nationalId }}</td>
+                        <td>{{ optional($driver->information)->city }}</td>
                         <td>{{ $driver->allHours }} <a href="{{ url('/drivers/'.$driver->id) }}" class="btn btn-outline-primary">view report</a></td>
                         <td>
                             <!-- Button trigger modal -->
@@ -121,7 +129,13 @@
                                                         <i class="icon-credit-card"></i>
                                                     </span>
                                                     <input type="text" name="national-id" id="national-id" class="form-control{{ $errors->has('national-id') ? ' is-invalid' : '' }}"
-                                                    placeholder="national-id" aria-describedby="helpId" required value="{{ optional($driver->information)->nationalId }}" >
+                                                    placeholder="national-id" aria-describedby="helpId" value="{{ optional($driver->information)->nationalId }}" >
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-flag"></i>
+                                                    </span>
+                                                    <input type="text" name="city" id="city" class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}" placeholder="city" aria-describedby="helpId" value="{{ optional($driver->information)->city }}">
                                                 </div>
                                             </form>
                                         </div>
@@ -150,3 +164,10 @@
         @include('layouts.footer')
     @endsection
 @endsection
+@push('js')
+    <script>
+        document.addEventListener("turbolinks:load", function(){
+            $(".datatable").DataTable();
+        });
+    </script>
+@endpush

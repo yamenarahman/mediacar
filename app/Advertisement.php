@@ -12,4 +12,9 @@ class Advertisement extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
 }

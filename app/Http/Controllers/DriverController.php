@@ -31,7 +31,8 @@ class DriverController extends Controller
         request()->validate([
             'name'        => 'required',
             'phone'       => 'required|unique:users',
-            'national-id' => 'nullable'
+            'national-id' => 'nullable',
+            'city'        => 'nullable'
         ]);
 
         $driver = User::create([
@@ -43,9 +44,10 @@ class DriverController extends Controller
 
         $driver->assignRole('Driver');
 
-        if (request('national-id')) {
-            $driver->information()->updateOrCreate(['nationalId' => request('national-id')]);
-        }
+        $driver->information()->updateOrCreate([
+            'nationalId' => request('national-id'),
+            'city'       => request('city')
+        ]);
 
         return redirect('/drivers');
     }
@@ -65,17 +67,6 @@ class DriverController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -89,7 +80,8 @@ class DriverController extends Controller
         request()->validate([
             'name'        => 'required',
             'phone'       => 'required|unique:users,phone,'.$driver->id,
-            'national-id' => 'nullable'
+            'national-id' => 'nullable',
+            'city'        => 'nullable'
         ]);
 
         $driver->update([
@@ -97,6 +89,11 @@ class DriverController extends Controller
             'phone'    => request('phone'),
             'email'    => request('phone').'@mediacar.com',
             'password' => bcrypt(request('phone'))
+        ]);
+
+        $driver->information->update([
+            'nationalId' => request('national-id'),
+            'city'       => request('city')
         ]);
 
         return redirect('/drivers');

@@ -5,13 +5,10 @@
         <div class="col-6">
             @if($errors->any())
                 @foreach($errors->all() as $error)
-                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
+
+                    <b-alert show variant="danger">
                         {{ $error }}
-                    </div>
+                    </b-alert>
                 @endforeach
             @endif
             <div class="card">

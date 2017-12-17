@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use JavaScript;
 use App\Advertisement;
 
 class HomeController extends Controller
@@ -24,10 +25,24 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (request('filter') == 'videos') {
+            $advertisements = Advertisement::latest()->type('video')->with('vendor')->get();
+            $type = 'videos';
+
+            JavaScript::put([
+                'vids' => $advertisements->pluck('source')
+            ]);
+        } else {
+            $advertisements = Advertisement::latest()->type('banner')->with('vendor')->get();
+            $type = 'banners';
+        }
+
+
         return view('home', [
-            'ads' => Advertisement::all()->shuffle(),
-            'drivers' => User::role('Driver')->count(),
-            'adsCount' => Advertisement::count()
+            'ads'      => $advertisements,
+            'drivers'  => User::role('Driver')->count(),
+            'adsCount' => Advertisement::count(),
+            'type'     => $type
         ]);
     }
 }

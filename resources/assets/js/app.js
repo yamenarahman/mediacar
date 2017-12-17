@@ -13,6 +13,7 @@ require('./bootstrap');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('commercial', require('./components/Commercial.vue'));
 
 document.addEventListener("turbolinks:load", () => {
     var app = new Vue({

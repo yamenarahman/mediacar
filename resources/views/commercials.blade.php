@@ -4,33 +4,45 @@
             @if($ads->isEmpty())
                 <h4 class="text-center">No ads yet.</h4>
             @else
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                    @foreach($ads as $ad)
-                        <div class="carousel-item {{ $loop->first? ' active': ' ' }}">
-                            @switch($ad->type)
-                                @case('picture')
-                                    <img class="d-block w-100" src="{{ $ad->source }}" alt="{{ $ad->title }}" style="width: 100%; height: 600px;">
-                                    @break
-                                @case('video')
-                                    <iframe src="{{ 'https://www.youtube.com/embed/'.$ad->source.'?autoplay=1' }} " frameborder="0" style="width: 100%; height: 600px;"></iframe>
-                                    @break
-                                @default
-
-                            @endswitch
+                @if($type == 'banners')
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+                        <div class="carousel-inner">
+                        @foreach($ads as $ad)
+                            <div class="carousel-item {{ $loop->first? ' active': '' }} {{ $loop->last? ' last': '' }}">
+                                <img class="d-block w-100" src="{{ $ad->source }}" alt="{{ $ad->title }}" style="width: 100%; height: 500px;">
+                            </div>
+                        @endforeach
                         </div>
-                    @endforeach
-                    </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        {{--  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
-                        </a>
-                </div>
+                        </a>  --}}
+                    </div>
+                @else
+                    <commercial></commercial>
+                    {{--  <commercial vids="{{ $ads->pluck('source') }}"></commercial>  --}}
+                @endif
             @endif
         </div>
     </div>
 </div>
+@push('js')
+<script>
+document.addEventListener("turbolinks:load", function(){
+    $('#myCarousel').on('slid.bs.carousel', function (e) {
+        var carouselData = $(this).data('bs.carousel');
+        var currentItem = $(e.relatedTarget);
+
+        if(currentItem.hasClass("last") && "{{ $type }}" == "banners"){
+            setTimeout(function(){
+                window.location.href = '/home?filter=videos';
+            },4000);
+        }
+    });
+});
+</script>
+@endpush

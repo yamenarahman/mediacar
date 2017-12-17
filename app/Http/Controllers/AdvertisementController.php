@@ -14,7 +14,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        return view('advertisements.index', ['advertisements' => Advertisement::latest()->with('vendor')->get()]);
+        return view('advertisements.index')->with(['advertisements' => Advertisement::latest()->with('vendor')->get()]);
     }
 
     /**
@@ -38,28 +38,6 @@ class AdvertisementController extends Controller
         ]);
 
         return redirect('/advertisements');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Advertisement  $advertisement
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Advertisement $advertisement)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Advertisement  $advertisement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Advertisement $advertisement)
-    {
-        //
     }
 
     /**

@@ -33,7 +33,7 @@
 
                             <div class="form-check">
                                 <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="type" id="type" value="picture" checked>
+                                <input type="radio" class="form-check-input" name="type" id="type" value="banner" checked>
                                     Banner
                               </label>
                             </div>
@@ -89,13 +89,13 @@
                                     @case('video')
                                         <td><i class="fa fa-video-camera" aria-hidden="true"></i></td>
                                         <td>
-                                            <iframe src="{{ 'https://www.youtube.com/embed/'.$advertisement->source }} " width="200px" height="200px" frameborder="0"></iframe>
+                                            <iframe src="{{ 'https://www.youtube.com/embed/'.$advertisement->source }} " width="200px" height="150px" frameborder="0"></iframe>
                                         </td>
                                         @break
-                                    @case('picture')
+                                    @case('banner')
                                         <td><i class="fa fa-picture-o" aria-hidden="true"></i></td>
                                         <td>
-                                            <img src="{{ $advertisement->source }}" class="img img-responsive" width="200px" height="200px">
+                                            <img src="{{ $advertisement->source }}" class="img img-responsive" width="200px" height="150px">
                                         </td>
                                         @break
                                     @default
@@ -124,7 +124,7 @@
 
                                                         <div class="form-check">
                                                             <label class="form-check-label">
-                                                                <input type="radio" class="form-check-input" name="type" id="type" value="picture" checked> Banner
+                                                                <input type="radio" class="form-check-input" name="type" id="type" value="banner" checked> Banner
                                                             </label>
                                                         </div>
                                                         <div class="form-check">

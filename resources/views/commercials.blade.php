@@ -24,7 +24,6 @@
                     </div>
                 @else
                     <commercial></commercial>
-                    {{--  <commercial vids="{{ $ads->pluck('source') }}"></commercial>  --}}
                 @endif
             @endif
         </div>
@@ -33,6 +32,11 @@
 @push('js')
 <script>
 document.addEventListener("turbolinks:load", function(){
+    if({{ count($ads) }} == 1 && "{{ $type }}" == "banners"){
+        setTimeout(function(){
+            window.location.href = '/home?filter=videos';
+        },4000);
+    }
     $('#myCarousel').on('slid.bs.carousel', function (e) {
         var carouselData = $(this).data('bs.carousel');
         var currentItem = $(e.relatedTarget);

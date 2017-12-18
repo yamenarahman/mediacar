@@ -34,6 +34,28 @@
                                 </div>
                                 @endif
                             </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon">
+                                    <i class="icon-flag"></i>
+                                </span>
+                                <input type="text" class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" value="{{ old('city') }}"
+                                    required placeholder="city"> @if ($errors->has('city'))
+                                <div class="invalid-feedback">
+                                    <strong>{{ $errors->first('city') }}</strong>
+                                </div>
+                                @endif
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon">
+                                    <i class="icon-credit-card"></i>
+                                </span>
+                                <input type="text" class="form-control{{ $errors->has('national-id') ? ' is-invalid' : '' }}" name="national-id" value="{{ old('national-id') }}"
+                                    required placeholder="national-id"> @if ($errors->has('national-id'))
+                                <div class="invalid-feedback">
+                                    <strong>{{ $errors->first('national-id') }}</strong>
+                                </div>
+                                @endif
+                            </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-addon">@</span>

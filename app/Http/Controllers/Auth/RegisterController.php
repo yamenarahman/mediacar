@@ -52,6 +52,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|min:10|max:20|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'national-id' => 'nullable',
+            'city' => 'nullable'
         ]);
     }
 
@@ -68,6 +70,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
+        ]);
+
+        $user->information()->create([
+            'city' => $data['city'],
+            'nationalId' => $data['national-id']
         ]);
 
         $user->assignRole('Driver');

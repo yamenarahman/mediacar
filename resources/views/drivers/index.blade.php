@@ -90,10 +90,30 @@
                         <td>{{ optional($driver->information)->city }}</td>
                         <td>{{ $driver->allHours }} <a href="{{ url('/drivers/'.$driver->id) }}" class="btn btn-outline-primary">view report</a></td>
                         <td>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-default pull-left" data-toggle="modal" data-target="#edit-driver-{{ $driver->id }}">
-                                <i class="fa fa-edit"></i> Edit driver
-                            </button>
+
+                            <ul class="list-group" style="list-style: none;">
+                                <li>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-default pull-left" data-toggle="modal" data-target="#edit-driver-{{ $driver->id }}">
+                                        <i class="fa fa-edit"></i> Edit driver
+                                    </button>
+                                </li>
+                                <li>
+                                    <form class="form-inline" action="{{ url('/drivers/'.$driver->id) }}" method="POST">
+                                        {{ csrf_field() }} {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-danger" id="delete-driver-btn" onclick="return confirm('Confirm, please.');">
+                                            <i class="fa fa-trash"></i> Delete</button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form method="POST" id="edit-driver-form-{{ $driver->id }}" action="{{ url('/drivers/'.$driver->id) }}">
+                                        {{ csrf_field() }} {{ method_field('PUT') }}
+                                        <input type="hidden" name="reset" value="reset">
+                                        <button type="submit" class="btn btn-info" id="reset-driver-btn" onclick="return confirm('Confirm, please.');">
+                                            <i class="fa fa-trash"></i> Reset password</button>
+                                    </form>
+                                </li>
+                            </ul>
 
                             <!-- Modal -->
                             <div class="modal fade" id="edit-driver-{{ $driver->id }}" tabindex="-1" role="dialog" aria-labelledby="edit-driver" aria-hidden="true">
@@ -146,12 +166,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="form-inline" action="{{ url('/drivers/'.$driver->id) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-danger" id="delete-driver-btn" onclick="return confirm('Confirm, please.');">
-                                    <i class="fa fa-trash"></i> Delete</button>
-                            </form>
                         </td>
                     </tr>
                 @endforeach

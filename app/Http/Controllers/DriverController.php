@@ -77,24 +77,29 @@ class DriverController extends Controller
     {
         $driver = User::findOrFail($id);
 
-        request()->validate([
-            'name'        => 'required',
-            'phone'       => 'required|unique:users,phone,'.$driver->id,
-            'national-id' => 'nullable',
-            'city'        => 'nullable'
-        ]);
+        if (request('reset')) {
+            $driver->update(['password' => bcrypt($driver->phone)]);
+        } else {
+            request()->validate([
+                'name'        => 'required',
+                'phone'       => 'required|unique:users,phone,'.$driver->id,
+                'national-id' => 'nullable',
+                'city'        => 'nullable'
+            ]);
 
-        $driver->update([
-            'name'     => request('name'),
-            'phone'    => request('phone'),
-            'email'    => request('phone').'@mediacar.com',
-            'password' => bcrypt(request('phone'))
-        ]);
+            $driver->update([
+                'name'     => request('name'),
+                'phone'    => request('phone'),
+                'email'    => request('phone').'@mediacar.com',
+                'password' => bcrypt(request('phone'))
+            ]);
 
-        $driver->information->update([
-            'nationalId' => request('national-id'),
-            'city'       => request('city')
-        ]);
+            $driver->information->update([
+                'nationalId' => request('national-id'),
+                'city'       => request('city')
+            ]);
+        }
+
 
         return redirect('/drivers');
     }

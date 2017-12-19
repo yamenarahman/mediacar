@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row mt-5">
+{{--  <div class="container-fluid">  --}}
+    <div class="row mt-3">
         <div class="col-md-12 col-lg-12 col-sm-12">
             @if($ads->isEmpty())
                 <h4 class="text-center">No ads yet.</h4>
@@ -28,7 +28,7 @@
             @endif
         </div>
     </div>
-</div>
+{{--  </div>  --}}
 @push('js')
 <script>
 document.addEventListener("turbolinks:load", function(){

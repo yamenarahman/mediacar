@@ -14,7 +14,15 @@ export default {
         slide() {
             this.i++;
             if (this.i == this.vids.length) {
-                window.location.href = '/home?filter=banners'; // images
+                axios.put('/increment', {
+                    adsCount: this.i
+                }).then(function(response) {
+                    console.log(response);
+                }).catch(function(error) {
+                    alert(error);
+                });
+
+                window.location.href = '/home?filter=banners';
             } else {
                 this.vid = this.vids[this.i];
             }

@@ -17,10 +17,12 @@ class UserEventSubscriber
     {
         $lastShift = $event->user->shifts()->latest()->first();
 
-        $lastShift->update([
-            'loggedOut' => Carbon::now(),
-            'minutes'   => Carbon::parse($lastShift->loggedIn)->diffInMinutes(Carbon::now())
-        ]);
+        if ($lastShift) {
+            $lastShift->update([
+                'loggedOut' => Carbon::now(),
+                'minutes'   => Carbon::parse($lastShift->loggedIn)->diffInMinutes(Carbon::now())
+            ]);
+        }
     }
 
     public function subscribe($events)

@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('settings');
@@ -14,13 +19,13 @@ class SettingsController extends Controller
     public function update()
     {
         request()->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|min:10|max:20|unique:users,phone,'.auth()->id(),
+            'name'     => 'required|string|max:255',
+            'phone'    => 'required|string|min:10|max:20|unique:users,phone,'.auth()->id(),
             'password' => 'nullable|string|min:6|confirmed'
         ]);
 
         auth()->user()->update([
-            'name' => request('name'),
+            'name'  => request('name'),
             'phone' => request('phone')
         ]);
 

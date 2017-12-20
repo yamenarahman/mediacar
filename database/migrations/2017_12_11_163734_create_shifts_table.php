@@ -17,6 +17,7 @@ class CreateShiftsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
             $table->dateTime('loggedIn');
+            $table->integer('adsCount')->default(0);
             $table->dateTime('loggedOut')->nullable();
             $table->integer('minutes')->nullable();
             $table->timestamps();

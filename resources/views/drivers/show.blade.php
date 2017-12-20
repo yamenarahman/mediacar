@@ -15,6 +15,7 @@
                         <tr>
                             <th>Date</th>
                             <th>Hours</th>
+                            <th>Ads</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -22,6 +23,11 @@
                                 <tr>
                                     <td scope="row">{{ $shift->created_at->format('d-m-Y') }}</td>
                                     <td>{{ floor($shift->minutes / 60).' hours, '.($shift->minutes % 60).' minutes.' }}</td>
+                                    <td>
+                                        <h5>
+                                            <span class="badge badge-primary">{{ $shift->adsCount }}</span>
+                                        </h5>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -32,7 +32,19 @@
 @push('js')
 <script>
 document.addEventListener("turbolinks:load", function(){
-    if({{ count($ads) }} == 1 && "{{ $type }}" == "banners"){
+    var ads = {{ count($ads) }};
+
+    function increment() {
+        axios.put('/increment', {
+            adsCount: ads
+        }).then(function(response){
+            console.log(response);
+        }).catch(function(error) {
+            alert(error);
+        });
+    }
+    if( ads == 1 && "{{ $type }}" == "banners"){
+        increment();
         setTimeout(function(){
             window.location.href = '/home?filter=videos';
         },4000);
@@ -42,6 +54,7 @@ document.addEventListener("turbolinks:load", function(){
         var currentItem = $(e.relatedTarget);
 
         if(currentItem.hasClass("last") && "{{ $type }}" == "banners"){
+            increment();
             setTimeout(function(){
                 window.location.href = '/home?filter=videos';
             },4000);

@@ -28,9 +28,11 @@
 <body>
     <div class="app header-fixed @role('Admin') sidebar-fixed @else sidebar-hidden @endrole aside-menu-fixed aside-menu-hidden" id="app">
         <header class="app-header navbar">
+            @role('Admin')
             <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            @endrole
             <a class="navbar-brand" href="{{ url('/') }}"></a>
             <ul class="nav navbar-nav ml-auto" style="margin-right: 20px;">
                 @auth

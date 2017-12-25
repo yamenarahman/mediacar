@@ -4,7 +4,7 @@
 <div class="app flex-row align-items-center">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-12">
                 <div class="card mx-4">
                     <div class="card-body p-4">
                         <h1>Register</h1>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             @if($errors->any())
                 @foreach($errors->all() as $error)
 

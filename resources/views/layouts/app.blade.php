@@ -23,7 +23,13 @@
     <script src="{{ asset('js/core-ui.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>  --}}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4367808835594741",
+            enable_page_level_ads: true
+        });
+    </script>
 </head>
 <body>
     <div class="app header-fixed @role('Admin') sidebar-fixed @else sidebar-hidden @endrole aside-menu-fixed aside-menu-hidden" id="app">

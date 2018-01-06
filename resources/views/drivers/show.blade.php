@@ -10,7 +10,7 @@
     <div class="col-md-12 col-lg-12">
         <div class="card card-accent-info">
             <div class="card-body">
-                <table class="table table-striped table-hover table-responsive">
+                <table class="table table-striped table-hover table-responsive datatable">
                     <thead class="thead-default">
                         <tr>
                             <th>Date</th>
@@ -41,3 +41,23 @@
         @include('layouts.footer')
     @endsection
 @endsection
+@push('js')
+    <script>
+        document.addEventListener("turbolinks:load", () => {
+            $(".datatable").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text:'<i class="fa fa-file-excel-o"> Excel</i>',
+                        title: '{{ $driver->name }}'
+                    },{
+                        extend: 'pdfHtml5',
+                        text: '<i class="fa fa-file-pdf-o"> PDF</i>',
+                        title: '{{ $driver->name }}'
+                    }
+                ]
+            });
+        });
+    </script>
+@endpush

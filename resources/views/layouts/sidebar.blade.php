@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/drivers') }}">
+                <a class="nav-link" href="{{ url('/drivers') }}" data-turbolinks="false">
                     <i class="icon-people" aria-hidden="true"></i> Drivers
                     <span class="badge badge-primary"></span>
                 </a>

@@ -4,6 +4,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <h3>{{ $driver->name }}</h3>
+        <a href="{{ url('/drivers/'.$driver->id.'/shifts') }}" class="btn btn-success pull-right" data-turbolinks="false"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export data</a>
     </div>
 </div>
 <div class="row">
@@ -17,20 +18,20 @@
                             <th>Hours</th>
                             <th>Ads</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($driver->shifts as $shift)
-                                <tr>
-                                    <td scope="row">{{ $shift->created_at->format('d-m-Y') }}</td>
-                                    <td>{{ floor($shift->minutes / 60).' hours, '.($shift->minutes % 60).' minutes.' }}</td>
-                                    <td>
-                                        <h5>
-                                            <span class="badge badge-primary">{{ $shift->adsCount }}</span>
-                                        </h5>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                    </thead>
+                    <tbody>
+                        @foreach($driver->shifts as $shift)
+                            <tr>
+                                <td>{{ $shift->created_at->format('d-m-Y') }}</td>
+                                <td>{{ floor($shift->minutes / 60).' hours, '.($shift->minutes % 60).' minutes.' }}</td>
+                                <td>
+                                    <h5>
+                                        <span class="badge badge-primary">{{ $shift->adsCount }}</span>
+                                    </h5>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -44,20 +45,14 @@
 @push('js')
     <script>
         document.addEventListener("turbolinks:load", () => {
-            $(".datatable").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excelHtml5',
-                        text:'<i class="fa fa-file-excel-o"> Excel</i>',
-                        title: '{{ $driver->name }}'
-                    },{
-                        extend: 'pdfHtml5',
-                        text: '<i class="fa fa-file-pdf-o"> PDF</i>',
-                        title: '{{ $driver->name }}'
-                    }
-                ]
+            var table = $('.datatable').DataTable({
+                lengthChange: false,
+                buttons: [{
+                    extend: 'pdf',
+                    title: '{{ $driver->name.' '.now()->toDateString() }}'
+                }]
             });
+            table.buttons().container().appendTo('.card-body .col-md-6:eq(0)');
         });
     </script>
 @endpush

@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'SettingsController@index');
 Route::put('/settings', 'SettingsController@update');
 Route::put('/increment', 'ShiftController@update');
+Route::get('/drivers/{id}/shifts', 'ShiftController@show');
 
 Route::group(['middleware' => ['web','auth','role:Admin']], function () {
     Route::resource('drivers', 'DriverController', ['except' => ['create', 'edit']]);

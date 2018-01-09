@@ -98,7 +98,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <table class="table table-responsive-sm table-striped datatable">
+        <table class="table table-responsive-sm table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -116,7 +116,7 @@
                         <td>{{ $driver->phone }}</td>
                         <td>{{ optional($driver->information)->nationalId }}</td>
                         <td>{{ optional($driver->information)->city }}</td>
-                        <td>{{ $driver->allHours }} <a href="{{ url('/drivers/'.$driver->id) }}" class="btn btn-outline-primary">view report</a></td>
+                        <td>{{ $driver->allHours }} <a href="{{ url('/drivers/'.$driver->id) }}" class="btn btn-outline-primary" data-turbolinks="false">view report</a></td>
                         <td>
 
                             <ul class="list-group" style="list-style: none;">
@@ -206,23 +206,3 @@
         @include('layouts.footer')
     @endsection
 @endsection
-@push('js')
-    <script>
-        document.addEventListener("turbolinks:load", () => {
-            $(".datatable").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excelHtml5',
-                        text:'<i class="fa fa-file-excel-o"> Excel</i>',
-                        title: 'Mediacar drivers - {{ now() }}'
-                    },{
-                        extend: 'pdfHtml5',
-                        text: '<i class="fa fa-file-pdf-o"> PDF</i>',
-                        title: 'Mediacar drivers - {{ now() }}'
-                    }
-                ]
-            });
-        });
-    </script>
-@endpush

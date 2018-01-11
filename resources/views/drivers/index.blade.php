@@ -134,7 +134,7 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <form method="POST" id="edit-driver-form-{{ $driver->id }}" action="{{ url('/drivers/'.$driver->id) }}">
+                                    <form method="POST" action="{{ url('/drivers/'.$driver->id) }}">
                                         {{ csrf_field() }} {{ method_field('PUT') }}
                                         <input type="hidden" name="reset" value="reset">
                                         <button type="submit" class="btn btn-info" id="reset-driver-btn" onclick="return confirm('Confirm, please.');">

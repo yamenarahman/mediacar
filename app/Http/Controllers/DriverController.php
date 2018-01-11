@@ -100,7 +100,6 @@ class DriverController extends Controller
             ]);
         }
 
-
         return redirect('/drivers');
     }
 

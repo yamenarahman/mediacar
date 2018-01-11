@@ -9,6 +9,13 @@
 </div>
 <div class="row">
     <div class="col-md-12 col-lg-12">
+        @if ($errors->any())
+            @foreach ($errors as $error)
+                <div class="alert alert-danger" role="alert">
+                    <strong>danger</strong> {{ $error }}
+                </div>
+            @endforeach
+        @endif
         <div class="card card-accent-info">
             <div class="card-body">
                 <table class="table table-striped table-hover table-responsive datatable">

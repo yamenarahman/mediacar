@@ -407,9 +407,8 @@ http://www.templatemo.com/tm-406-flex
 
                     	</p>
                       <ul class="contact-info">
-                            <!--<li>Phone: </li>-->
-                            <li>Email: <a href="mailto:info@mediacargroup.com">info@mediacargroup.com</a></li>
-                            <li></li>
+                            <li>Phone: <strong>01552676369</strong></li>
+                            <li>Email: <a href="mailto:mediacargroup@gmail.com">mediacargroup@gmail.com</a></li>
                         </ul>
                         <!-- spacing for mobile viewing --><br><br>
                     </div> <!-- /.col-md-7 -->
